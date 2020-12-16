@@ -70,7 +70,7 @@ function Sidebar(props) {
           onClick={props.toggleSidebar}
         >
           <div className="logo-img">
-            <img src={logo.imgSrc} alt="react-logo" />
+          <i className="tim-icons icon-shape-star" />
           </div>
         </a>
       );
@@ -92,7 +92,8 @@ function Sidebar(props) {
           onClick={props.toggleSidebar}
         >
           <div className="logo-img">
-            <img src={logo.imgSrc} alt="react-logo" />
+          <i className="tim-icons icon-shape-star" />
+            <img src={logo.imgSrc} alt="tim-icons icon-shape-star" />
           </div>
         </Link>
       );
