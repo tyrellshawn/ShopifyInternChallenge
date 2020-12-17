@@ -19,7 +19,7 @@ function Nominations() {
           <Col md="12">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Popular Movies</CardTitle>
+                <CardTitle tag="h4">Movies You've Nominated</CardTitle>
               </CardHeader>
               <CardBody>
               </CardBody>

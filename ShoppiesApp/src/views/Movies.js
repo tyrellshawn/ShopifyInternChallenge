@@ -34,6 +34,15 @@ function Movies() {
               <CardBody>
               </CardBody>
             </Card>
+            <Card className="card-plain">
+              <CardHeader>
+                <CardTitle tag="h4">Adventure Movies</CardTitle>
+                <p className="category">A wild ride!</p>
+              </CardHeader>
+              <CardBody>
+              </CardBody>
+            </Card>
+ 
           </Col>
         </Row>
       </div>
