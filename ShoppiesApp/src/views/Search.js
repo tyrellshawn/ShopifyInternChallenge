@@ -18,6 +18,7 @@ import {
 class Search extends Component{
   constructor(){
     super();
+    this.movieDB = new MovieDBService();
     this.state ={message:"No Movie has been Searched!"}
     this.onKeyUp = this.onKeyUp.bind(this);
 
@@ -26,6 +27,7 @@ class Search extends Component{
     if (event.charCode === 13) {
       console.log(event.target.value);
       this.setState({ searchValue: event.target.value });
+      this.movieDB.getMovies(event.target.value);
     }
   }
   render(){
