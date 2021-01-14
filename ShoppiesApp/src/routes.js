@@ -23,16 +23,15 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
-import Movies from "views/Movies.js";
 import Nominations from "views/Nominations.js";
 import Search from "views/Search.js";
 var routes = [
   { 
-    path:"/movies",
-    name: "Movies",
+    path:"/search",
+    name: "Search",
     rtlName:"لوحة القيادة",
-    icon:"tim-icons icon-video-66",
-    component: Movies,
+    icon:"tim-icons icon-zoom-split",
+    component: Search,
     layout:"/admin"
   },
   { 
@@ -42,87 +41,15 @@ var routes = [
     icon:"tim-icons icon-trophy",
     component: Nominations,
     layout:"/admin"
-  },
-  { 
-    path:"/search",
-    name: "Search",
-    rtlName:"لوحة القيادة",
-    icon:"tim-icons icon-zoom-split",
-    component: Search,
-    layout:"/admin"
-  },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Dashboard,
-    layout: "/admin",
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "الرموز",
-    icon: "tim-icons icon-atom",
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/map",
-    name: "Map",
-    rtlName: "خرائط",
-    icon: "tim-icons icon-pin",
-    component: Map,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: "tim-icons icon-bell-55",
-    component: Notifications,
-    layout: "/admin",
-  },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: "tim-icons icon-single-02",
-    component: UserProfile,
-    layout: "/admin",
-  },
-  {
-    path: "/tables",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "tim-icons icon-puzzle-10",
-    component: TableList,
-    layout: "/admin",
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-    icon: "tim-icons icon-align-center",
-    component: Typography,
-    layout: "/admin",
-  },
-  {
-    path: "/rtl-support",
-    name: "RTL Support",
-    rtlName: "ار تي ال",
-    icon: "tim-icons icon-world",
-    component: Rtl,
-    layout: "/rtl",
-  },
+  }
 ];
 var oldRoutes =  [
   { 
-    path:"/movies",
-    name: "Movies",
+    path:"/search",
+    name: "Search",
     rtlName:"لوحة القيادة",
-    icon:"tim-icons icon-video-66",
-    component: Movies,
+    icon:"tim-icons icon-zoom-split",
+    component: Search,
     layout:"/admin"
   },
   { 
@@ -133,14 +60,7 @@ var oldRoutes =  [
     component: Nominations,
     layout:"/admin"
   },
-  { 
-    path:"/search",
-    name: "Search",
-    rtlName:"لوحة القيادة",
-    icon:"tim-icons icon-zoom-split",
-    component: Search,
-    layout:"/admin"
-  },
+  
   {
     path: "/dashboard",
     name: "Dashboard",
