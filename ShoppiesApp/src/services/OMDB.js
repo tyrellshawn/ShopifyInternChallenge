@@ -6,7 +6,7 @@ class MovieDBService{
   apiKey;
   instance;
   constructor(){
-    this.apiKey = "63e90fe3";
+    this.apiKey = '63e90fe3';
     this.instance = axios.create({
       baseURL: 'http://www.omdbapi.com',
       headers:{'apikey':this.apiKey}
@@ -22,31 +22,31 @@ class MovieDBService{
     }})
 
   }
-  getMovies(searchText){
+  async getMovies(searchText){
     var output = "";
-    axios.get('http://www.omdbapi.com?t='+searchText+'?&s='+searchText+'&apikey=63e90fe3')
+   const req = await axios.get('http://www.omdbapi.com?t='+searchText+'?&s='+searchText+'&apikey='+this.apiKey)
       .then((response) => {
         console.log(response);
         let movies = response.data.Search;
-        let output = '';
-        movies.forEach((index, movie) => {
+        
+        movies.forEach((movie,index ) => {
           output += `
             <div class="col-md-3">
               <div class="well text-center">
                 <img src="${movie.Poster}">
                 <h5>${movie.Title}</h5>
-                <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
+                <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Nominate</a>
               </div>
             </div>
           `;
         });
-  
+        document.getElementById('movies').innerHTML = output;
         
       })
       .catch((err) => {
         console.log(err);
       });
-      return output;
+      
   }  
   
 movieSelected(id){
