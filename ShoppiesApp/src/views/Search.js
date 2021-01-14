@@ -57,7 +57,7 @@ class Search extends Component{
           <Col md="12">
             <hr />
             <span> Input value is : {searchValue}</span>
-            <div id="movies"></div>
+            <div id="movies" class="row"></div>
           </Col>
         </Row>
         </div>

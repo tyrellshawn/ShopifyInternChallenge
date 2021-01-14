@@ -1,17 +1,17 @@
 import axios from 'axios';
-import jquery from '../../node_modules/jquery';
+import React, {Component} from "react";
 //import MovieModel from "..//models/MovieModel";
 
-class MovieDBService{
+class MovieDBService extends Component{
   apiKey;
   instance;
   constructor(){
+    super();
     this.apiKey = '63e90fe3';
-    this.instance = axios.create({
-      baseURL: 'http://www.omdbapi.com',
-      headers:{'apikey':this.apiKey}
-
-    })
+    this.state = {
+      movies: [],
+      nominated: []
+    }
   }
   getPopularMovies(){
     
@@ -28,14 +28,15 @@ class MovieDBService{
       .then((response) => {
         console.log(response);
         let movies = response.data.Search;
-        
+        this.state.movies = [];
         movies.forEach((movie,index ) => {
+          this.state.movies.push(movie)
           output += `
             <div class="col-md-3">
               <div class="well text-center">
                 <img src="${movie.Poster}">
                 <h5>${movie.Title}</h5>
-                <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Nominate</a>
+                <a id="${movie.imdbID}" class="btn btn-primary" href="#">Nominate</a>
               </div>
             </div>
           `;

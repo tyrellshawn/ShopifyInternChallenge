@@ -4,12 +4,13 @@ class MovieModel extends Component{
   imageUrl;
   releaseYear;
   nominated;
-
-  constructor(Title,ImageUrl, ReleaseYear){
+  imdbID;
+  constructor(Title,ImageUrl, ReleaseYear,imdbID){
     this.title = Title;
     this.imageUrl = ImageUrl;
     this.releaseYear = ReleaseYear;
     this.nominated = false;
+    this.imdbID = imdbID;
   }
   setNominated(update){
     this.nominated = update;
@@ -18,9 +19,9 @@ class MovieModel extends Component{
     return`
     <div class="col-md-3">
       <div class="well text-center">
-        <img src="${movie.Poster}">
-        <h5>${movie.Title}</h5>
-        <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
+        <img src="${this.imageUrl}">
+        <h5>${this.title}</h5>
+        <a onclick="movieSelected('${this.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
       </div>
     </div>
   `;
