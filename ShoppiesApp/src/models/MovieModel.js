@@ -6,6 +6,7 @@ class MovieModel extends Component{
   nominated;
   imdbID;
   constructor(Title,ImageUrl, ReleaseYear,imdbID){
+    super();
     this.title = Title;
     this.imageUrl = ImageUrl;
     this.releaseYear = ReleaseYear;
@@ -18,12 +19,15 @@ class MovieModel extends Component{
   render(){
     return`
     <div class="col-md-3">
+    <Card>
       <div class="well text-center">
         <img src="${this.imageUrl}">
-        <h5>${this.title}</h5>
+        <h5>${this.title} (${this.releaseYear}) </h5>
         <a onclick="movieSelected('${this.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
       </div>
+      </Card>
     </div>
   `;
   }
 }
+export default MovieModel;

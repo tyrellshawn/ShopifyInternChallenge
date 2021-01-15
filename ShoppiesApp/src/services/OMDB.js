@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {Component} from "react";
-//import MovieModel from "..//models/MovieModel";
+import MovieModel from "..//models/MovieModel";
 
 class MovieDBService extends Component{
   apiKey;
@@ -13,33 +13,19 @@ class MovieDBService extends Component{
       nominated: []
     }
   }
-  getPopularMovies(){
-    
-  }
-  searchMovie(query){
-    return this.instance({'method':'GET','params':{
-      's':query
-    }})
 
-  }
+
   async getMovies(searchText){
     var output = "";
    const req = await axios.get('http://www.omdbapi.com?t='+searchText+'?&s='+searchText+'&apikey='+this.apiKey)
       .then((response) => {
         console.log(response);
         let movies = response.data.Search;
-        this.state.movies = [];
+        this.setState({movies: movies});
         movies.forEach((movie,index ) => {
-          this.state.movies.push(movie)
-          output += `
-            <div class="col-md-3">
-              <div class="well text-center">
-                <img src="${movie.Poster}">
-                <h5>${movie.Title}</h5>
-                <a id="${movie.imdbID}" class="btn btn-primary" href="#">Nominate</a>
-              </div>
-            </div>
-          `;
+          
+          let movieResponseModel = new MovieModel(movie.Title,movie.Poster,movie.Year,movie.imdbID);
+          output += movieResponseModel.render().toString();
         });
         document.getElementById('movies').innerHTML = output;
         
@@ -50,56 +36,7 @@ class MovieDBService extends Component{
       
   }  
   
-movieSelected(id){
-  sessionStorage.setItem('movieId', id);
-  window.location = 'movie.html';
-  return false;
-}
-  getMovie(){
-    var output = "";
-    let movieId = sessionStorage.getItem('movieId');
-  
-    axios.get('http://www.omdbapi.com?i='+movieId)
-      .then((response) => {
-        console.log(response);
-        let movie = response.data;
-  
-        let output =`
-          <div class="row">
-            <div class="col-md-4">
-              <img src="${movie.Poster}" class="thumbnail">
-            </div>
-            <div class="col-md-8">
-              <h2>${movie.Title}</h2>
-              <ul class="list-group">
-                <li class="list-group-item"><strong>Genre:</strong> ${movie.Genre}</li>
-                <li class="list-group-item"><strong>Released:</strong> ${movie.Released}</li>
-                <li class="list-group-item"><strong>Rated:</strong> ${movie.Rated}</li>
-                <li class="list-group-item"><strong>IMDB Rating:</strong> ${movie.imdbRating}</li>
-                <li class="list-group-item"><strong>Director:</strong> ${movie.Director}</li>
-                <li class="list-group-item"><strong>Writer:</strong> ${movie.Writer}</li>
-                <li class="list-group-item"><strong>Actors:</strong> ${movie.Actors}</li>
-              </ul>
-            </div>
-          </div>
-          <div class="row">
-            <div class="well">
-              <h3>Plot</h3>
-              ${movie.Plot}
-              <hr>
-              <a href="http://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">View IMDB</a>
-              <a href="index.html" class="btn btn-default">Go Back To Search</a>
-            </div>
-          </div>
-        `;
-  
-        
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      return output;
-  }
+
 
 }
 export default MovieDBService;

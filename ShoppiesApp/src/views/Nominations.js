@@ -25,17 +25,7 @@ function Nominations() {
               </CardBody>
             </Card>
           </Col>
-          <Col md="12">
-            <Card className="card-plain">
-              <CardHeader>
-                <CardTitle tag="h4">Action Movies</CardTitle>
-                <p className="category">Explosive Flicks</p>
-              </CardHeader>
-              <CardBody>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+          </Row>
       </div>
     </>
   );
