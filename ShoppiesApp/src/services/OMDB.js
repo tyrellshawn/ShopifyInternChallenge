@@ -17,17 +17,12 @@ class MovieDBService extends Component{
 
   async getMovies(searchText){
     var output = "";
-   const req = await axios.get('http://www.omdbapi.com?t='+searchText+'?&s='+searchText+'&apikey='+this.apiKey)
+   const req = await axios.get('http://www.omdbapi.com?t='+searchText+'?&s='+searchText+'&apikey='+this.apiKey+'&type=movie')
       .then((response) => {
         console.log(response);
         let movies = response.data.Search;
         this.setState({movies: movies});
-        movies.forEach((movie,index ) => {
-          
-          let movieResponseModel = new MovieModel(movie.Title,movie.Poster,movie.Year,movie.imdbID);
-          output += movieResponseModel.render().toString();
-        });
-        document.getElementById('movies').innerHTML = output;
+        
         
       })
       .catch((err) => {

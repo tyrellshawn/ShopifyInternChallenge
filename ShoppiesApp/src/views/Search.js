@@ -1,6 +1,9 @@
 import React, {Component} from "react";
-import MovieDBService from "../services/OMDB"
-import classNames from "classnames";
+import axios from 'axios';
+
+import MovieList from "../components/Movies/MovieList";
+import SearchBox from "../components/Search/SearchBox";
+
 // reactstrap components
 import {
   Card,
@@ -18,20 +21,38 @@ import {
 class Search extends Component{
   constructor(){
     super();
-    this.movieDB = new MovieDBService();
-    this.state ={message:"No Movie has been Searched!"}
-    this.onKeyUp = this.onKeyUp.bind(this);
+    this.state ={movies: [], searchTerm:''}
+    this.apiKey = '63e90fe3';
 
   }
-  onKeyUp(event){
-    if (event.charCode === 13) {
-      console.log(event.target.value);
-      this.setState({ searchValue: event.target.value });
-      this.movieDB.getMovies(event.target.value);
-    }
+  handleSubmit = (event) =>{
+    
+    event.preventDefault();
+    axios.get(`http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie`)
+      .then((response) => {
+        console.log(response);
+        if(response.data.Response === "False"){
+          console.log("API Error: "+response.data.Error);
+        }
+        else{
+          this.setState({movies: [...response.data.Search]});
+        }
+        
+        
+        
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
+  handleChange = (event) =>{
+    this.setState({searchTerm: event.target.value});
+   // this.handleSubmit(event);
+
+  }
+  
   render(){
-    const {searchValue} = this.state;
     return (
       <>
         <div className="content">
@@ -46,18 +67,14 @@ class Search extends Component{
               </Card>
             </Col>
             <Col md="12">
-              <Card className="card-plain">
-                <CardBody>
-                  <Input placeholder="SEARCH" type="text" onKeyPress={this.onKeyUp} />
-                </CardBody>
-              </Card>
+              <SearchBox handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
             </Col>
           </Row>
         <Row>
           <Col md="12">
             <hr />
-            <span> Input value is : {searchValue}</span>
-            <div id="movies" class="row"></div>
+            <span> Input value is : {this.state.searchTerm}</span>
+            <MovieList id="movies"movies={this.state.movies}/>
           </Col>
         </Row>
         </div>
