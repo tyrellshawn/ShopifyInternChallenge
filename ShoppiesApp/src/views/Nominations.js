@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // reactstrap components
 import {
@@ -9,7 +9,7 @@ import {
   Table,
   Row,
   Col,
-} from "reactstrap";
+} from 'reactstrap';
 
 function Nominations() {
   return (
@@ -21,11 +21,10 @@ function Nominations() {
               <CardHeader>
                 <CardTitle tag="h4">Movies You've Nominated</CardTitle>
               </CardHeader>
-              <CardBody>
-              </CardBody>
+              <CardBody></CardBody>
             </Card>
           </Col>
-          </Row>
+        </Row>
       </div>
     </>
   );

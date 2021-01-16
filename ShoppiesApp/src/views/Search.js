@@ -1,9 +1,9 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
 import axios from 'axios';
 
-import MovieList from "../components/Movies/MovieList";
-import SearchBox from "../components/Search/SearchBox";
-import PaginationView from "../components/Search/Pagination";
+import MovieList from '../components/Movies/MovieList';
+import SearchBox from '../components/Search/SearchBox';
+import PaginationView from '../components/Search/Pagination';
 
 // reactstrap components
 import {
@@ -17,61 +17,60 @@ import {
   Modal,
   ModalHeader,
   Input,
-} from "reactstrap";
+} from 'reactstrap';
 
-class Search extends Component{
-  constructor(){
+class Search extends Component {
+  constructor() {
     super();
-    this.state ={movies: [], searchTerm:'',totalResult:0,currentPage:1}
+    this.state = { movies: [], searchTerm: '', totalResult: 0, currentPage: 1 };
     this.apiKey = '63e90fe3';
-
   }
-  handleSubmit = (event) =>{
-    
+  handleSubmit = (event) => {
     event.preventDefault();
-    axios.get(`http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie`)
+    axios
+      .get(
+        `http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie`
+      )
       .then((response) => {
         console.log(response);
-        if(response.data.Response === "False"){
-          console.log("API Error: "+response.data.Error);
+        if (response.data.Response === 'False') {
+          console.log('API Error: ' + response.data.Error);
+        } else {
+          this.setState({
+            movies: [...response.data.Search],
+            totalResult: response.data.totalResults,
+          });
         }
-        else{
-          this.setState({movies: [...response.data.Search],totalResult:response.data.totalResults});
-        }
-        
-        
-        
-        
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-  handleChange = (event) =>{
-    this.setState({searchTerm: event.target.value});
-   // this.handleSubmit(event);
-
-  }
-  nextPage = (pageNumber) =>{
-    axios.get(`http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie&page=${pageNumber}`)
+  };
+  handleChange = (event) => {
+    this.setState({ searchTerm: event.target.value });
+    // this.handleSubmit(event);
+  };
+  nextPage = (pageNumber) => {
+    axios
+      .get(
+        `http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie&page=${pageNumber}`
+      )
       .then((response) => {
         console.log(response);
-        if(response.data.Response === "False"){
-          console.log("API Error: "+response.data.Error);
+        if (response.data.Response === 'False') {
+          console.log('API Error: ' + response.data.Error);
+        } else {
+          this.setState({
+            movies: [...response.data.Search],
+            currentPage: pageNumber,
+          });
         }
-        else{
-          this.setState({movies: [...response.data.Search],currentPage: pageNumber});
-        }
-        
-        
-        
-        
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-  render(){
+  };
+  render() {
     const numberOfPages = Math.floor(this.state.totalResult / 10);
     return (
       <>
@@ -82,30 +81,43 @@ class Search extends Component{
                 <CardHeader>
                   <CardTitle tag="h4">Search For a Movie</CardTitle>
                 </CardHeader>
-                <CardBody>
-                </CardBody>
+                <CardBody></CardBody>
               </Card>
             </Col>
             <Col md="12">
-              <SearchBox handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+              <SearchBox
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+              />
             </Col>
           </Row>
-        <Row>
-          <Col md="12">
-            <hr />
-            <span> Input value is : {this.state.searchTerm}</span>
-            <MovieList id="movies"movies={this.state.movies}/>
-          </Col>
-        </Row>
-        <Row>
-        {this.state.totalResult > 10 ? <PaginationView pages={numberOfPages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>: '' }
-        </Row>
+          <Row>
+            <Col md="12">
+              <hr />
+              <span>
+                {' '}
+                You Searched For: {this.state.searchTerm} Total Results:{' '}
+                {this.state.totalResult}
+              </span>
+
+              <MovieList id="movies" movies={this.state.movies} />
+            </Col>
+          </Row>
+          <Row>
+            {this.state.totalResult > 10 ? (
+              <PaginationView
+                pages={numberOfPages}
+                nextPage={this.nextPage}
+                currentPage={this.state.currentPage}
+              />
+            ) : (
+              ''
+            )}
+          </Row>
         </div>
-        
       </>
     );
   }
 }
-
 
 export default Search;

@@ -1,30 +1,28 @@
-import React, {Component} from "react";
-class MovieModel extends Component{
+import React, { Component } from 'react';
+class MovieModel extends Component {
   title;
   imageUrl;
   releaseYear;
   nominated;
   imdbID;
-  constructor(Title,ImageUrl, ReleaseYear,imdbID,props){
+  constructor(Title, ImageUrl, ReleaseYear, imdbID, props) {
     super(props);
     this.title = Title;
-    this.state = {nominated: false};
+    this.state = { nominated: false };
     this.setNominated = this.setNominated.bind(this);
     this.toggleNominate = this.toggleNominate.bind(this);
     this.imageUrl = ImageUrl;
     this.releaseYear = ReleaseYear;
     this.imdbID = imdbID;
   }
-  setNominated(update){
-    this.setState({nominated:update});
+  setNominated(update) {
+    this.setState({ nominated: update });
   }
-  toggleNominate(){
-
-    this.setState({nominated: !this.state.nominated})
-
+  toggleNominate() {
+    this.setState({ nominated: !this.state.nominated });
   }
-  render(){
-    return`
+  render() {
+    return `
     <div class="col-md-3">
     <Card>
       <div class="well text-center">
