@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import MovieList from "../components/Movies/MovieList";
 import SearchBox from "../components/Search/SearchBox";
+import PaginationView from "../components/Search/Pagination";
 
 // reactstrap components
 import {
@@ -21,7 +22,7 @@ import {
 class Search extends Component{
   constructor(){
     super();
-    this.state ={movies: [], searchTerm:''}
+    this.state ={movies: [], searchTerm:'',totalResult:0,currentPage:1}
     this.apiKey = '63e90fe3';
 
   }
@@ -35,7 +36,7 @@ class Search extends Component{
           console.log("API Error: "+response.data.Error);
         }
         else{
-          this.setState({movies: [...response.data.Search]});
+          this.setState({movies: [...response.data.Search],totalResult:response.data.totalResults});
         }
         
         
@@ -51,8 +52,27 @@ class Search extends Component{
    // this.handleSubmit(event);
 
   }
-  
+  nextPage = (pageNumber) =>{
+    axios.get(`http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie&page=${pageNumber}`)
+      .then((response) => {
+        console.log(response);
+        if(response.data.Response === "False"){
+          console.log("API Error: "+response.data.Error);
+        }
+        else{
+          this.setState({movies: [...response.data.Search],currentPage: pageNumber});
+        }
+        
+        
+        
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   render(){
+    const numberOfPages = Math.floor(this.state.totalResult / 10);
     return (
       <>
         <div className="content">
@@ -77,7 +97,11 @@ class Search extends Component{
             <MovieList id="movies"movies={this.state.movies}/>
           </Col>
         </Row>
+        <Row>
+        {this.state.totalResult > 10 ? <PaginationView pages={numberOfPages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>: '' }
+        </Row>
         </div>
+        
       </>
     );
   }

@@ -3,16 +3,16 @@ import { Card } from "reactstrap";
 
 const Movie = (props) =>{
   return(
-    <div class="col-md-3">
+    <div className="col-md-3">
     <Card>
-      <div class="well text-center">
+      <div className="well text-center">
         {
-          props.image === "N/A" ? <img src={`https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg`}/>: <img src={props.image} />
+          props.image === "N/A" ? <img src={`https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg`} style={{width:"200px",height:"250px"}}/>: <img src={props.image} style={{width:"200px",height:"250px"}} />
         }
         
 
-        <h5>{props.title} ({props.releaseYear}) </h5>
-        <a class="btn btn-primary" href="#"> Nominate </a>
+        <h5>{props.title.length < 26? props.title: props.title.substring(0,26)+'...'}  </h5><h5>({props.releaseYear})</h5>
+        <a className="btn btn-primary" href="#"> Nominate </a>
       </div>
     </Card>
     </div>
