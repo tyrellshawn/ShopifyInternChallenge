@@ -15,11 +15,13 @@ const Movie = (props) => {
           {props.image === 'N/A' ? (
             <img
               src={`https://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg`}
+              alt=""
               style={{ width: '200px', height: '250px' }}
             />
           ) : (
             <img
               src={props.image}
+              alt=""
               style={{ width: '200px', height: '250px' }}
             />
           )}

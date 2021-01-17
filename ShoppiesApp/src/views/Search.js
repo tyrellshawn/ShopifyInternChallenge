@@ -46,7 +46,7 @@ class Search extends Component {
     event.preventDefault();
     axios
       .get(
-        `http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie`
+        `https://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie`
       )
       .then((response) => {
         if (response.data.Response === 'False') {
