@@ -8,8 +8,8 @@ function Nominations() {
   const nominationData = Array.from(nominations.values());
   const [movies, setMovies] = useState(nominationData);
   useEffect(() => {
-    setMovies(nominationData);
-  }, [nominations]);
+    setMovies(Array.from(nominations.values()));
+  }, [movies]);
 
   return (
     <>

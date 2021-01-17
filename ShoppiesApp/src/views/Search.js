@@ -69,7 +69,7 @@ class Search extends Component {
   nextPage = (pageNumber) => {
     axios
       .get(
-        `http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie&page=${pageNumber}`
+        `https://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie&page=${pageNumber}`
       )
       .then((response) => {
         if (response.data.Response === 'False') {
