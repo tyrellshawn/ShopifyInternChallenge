@@ -1,20 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 
 //Context for Nomination State
 export const NominationContext = React.createContext();
 export const UpdateNominationContext = React.createContext();
 
 //Hooks for Retrievieng Nomination or Updating Nomination State
-// export function useNominations() {
-//   return useContext(NominationContext);
-// }
+export function useNominations() {
+  return useContext(NominationContext);
+}
 // export function useNominationUpdate() {
 //   return useContext(UpdateNominationContext);
 // }
 
 export default function NominationProvider({ children }) {
-  const [nominations, setNominations] = useState([]);
-
+  let nominated = new Map();
+  const [nominations, setNominations] = useState(nominated);
   function updateNominations(movieID) {
     console.log(`Movie Nominated with ID: ${movieID}`);
     setNominations((nominations) => [...nominations, movieID]);

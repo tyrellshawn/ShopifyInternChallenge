@@ -3,11 +3,12 @@ import { Card } from 'reactstrap';
 import {
   NominationContext,
   UpdateNominationContext,
+  useNominations,
 } from '../../contexts/NominationContext';
 
 const Movie = (props) => {
-  const { nominations, setNominations } = useContext(NominationContext);
-  const { nominated, setNominated } = useState(false);
+  const { nominations, setNominations } = useNominations();
+  const [nominated, setNominated] = useState(false);
 
   // const useNominationUpdate = useNominationUpdate();
 
@@ -39,6 +40,7 @@ const Movie = (props) => {
               setNominations((prev) => {
                 console.log(`Nominated movie with ID: ${props.imdbID}`);
                 console.log(prev);
+
                 if (prev.size < 5) {
                   prev.set(props.imdbID, props);
 
@@ -48,9 +50,10 @@ const Movie = (props) => {
                   return prev;
                 }
               });
+              setNominated(nominations.has(props.imdbID));
             }}
           >
-            {nominations.has(props.imdbID) ? 'Un-Nominate' : 'Nominate'}
+            {nominated ? 'Un-Nominate' : 'Nominate'}
           </a>
         </div>
       </Card>

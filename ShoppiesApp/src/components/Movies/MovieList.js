@@ -6,7 +6,7 @@ const MovieList = (props) => {
       {props.movies.map((movie, i) => {
         return (
           <Movie
-            key={i}
+            key={movie.imdbID}
             image={movie.Poster}
             title={movie.Title}
             releaseYear={movie.Year}
