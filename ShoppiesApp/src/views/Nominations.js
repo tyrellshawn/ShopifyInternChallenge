@@ -17,6 +17,7 @@ import NominationProvider, {
 } from '../contexts/NominationContext';
 function Nominations() {
   const { nominations } = useNominations();
+  const [movies] = useState(Array.from(nominations.values()));
 
   return (
     <>
@@ -32,7 +33,9 @@ function Nominations() {
           </Col>
         </Row>
         <Row>
-          <MovieList id="movies" movies={[]} />
+          <Col md="12">
+            <MovieList movies={movies} />
+          </Col>
         </Row>
       </div>
     </>

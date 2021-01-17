@@ -50,12 +50,11 @@ const Movie = (props) => {
                   }
                 } else {
                   // Un-Nominating a Movie
-                  try {
+                  if (prev.has(props.imdbID)) {
                     prev.delete(props.imdbID);
                     return prev;
-                  } catch (e) {
-                    console.log(`Error occurred un-nominating movie `);
                   }
+                  return prev;
                 }
               });
               setNominated(nominations.has(props.imdbID));

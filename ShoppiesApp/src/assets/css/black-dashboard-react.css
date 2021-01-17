@@ -20037,8 +20037,8 @@ textarea.form-control {
 select.form-control option {
   color: #888;
 }
-#movies img,
-#movie img {
+.movies img,
+.movie img {
   width: 100%;
 }
 

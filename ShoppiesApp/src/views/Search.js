@@ -95,7 +95,7 @@ class Search extends Component {
               <hr />
               <span>
                 {' '}
-                You Searched For: {this.state.searchTerm} Total Results:{' '}
+                You Searched For:" {this.state.searchTerm}" Total Results:{' '}
                 {this.state.totalResult}
               </span>
 

@@ -7,9 +7,11 @@ const MovieList = (props) => {
         return (
           <Movie
             key={movie.imdbID}
-            image={movie.Poster}
-            title={movie.Title}
-            releaseYear={movie.Year}
+            image={movie.hasOwnProperty('Poster') ? movie.Poster : movie.image}
+            title={movie.hasOwnProperty('Title') ? movie.Title : movie.title}
+            releaseYear={
+              movie.hasOwnProperty('Year') ? movie.Year : movie.releaseYear
+            }
             imdbID={movie.imdbID}
           />
         );
