@@ -27,7 +27,9 @@ function Footer() {
       <Container fluid>
         <Nav>
           <NavItem>
-            <NavLink href="https://github.com/tyrellshawn">My Github</NavLink>
+            <NavLink href="https://github.com/tyrellshawn/ShopifyInternChallenge/tree/master/ShoppiesApp">
+              My Github
+            </NavLink>
           </NavItem>
         </Nav>
       </Container>

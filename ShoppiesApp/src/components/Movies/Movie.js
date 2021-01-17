@@ -38,7 +38,12 @@ const Movie = (props) => {
               setNominations((prev) => {
                 if (!nominated) {
                   //Nominating a Movie
-                  if (prev.size < 5) {
+                  if (prev.size < 4) {
+                    prev.set(props.imdbID, props);
+
+                    return prev;
+                  } else if (prev.size == 4) {
+                    props.celebrate();
                     prev.set(props.imdbID, props);
 
                     return prev;

@@ -14,6 +14,9 @@ const MovieList = (props) => {
             }
             imdbID={movie.imdbID}
             alert={props.hasOwnProperty('alert') ? props.alert : false}
+            celebrate={
+              props.hasOwnProperty('celebrate') ? props.celebrate : false
+            }
           />
         );
       })}

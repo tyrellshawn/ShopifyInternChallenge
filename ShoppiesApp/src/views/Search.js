@@ -42,6 +42,22 @@ class Search extends Component {
       this.setState({ alertActive: false });
     }
   };
+  celebrateUser = () => {
+    let options = {
+      place: 'tr',
+      message: (
+        <div>
+          <div>
+            <span>You have nominated 5 movies! </span>
+          </div>
+        </div>
+      ),
+      type: 'success',
+      icon: 'tim-icons icon-trophy',
+      autoDismiss: 1,
+    };
+    this.notificationAlertRef.current.notificationAlert(options);
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -122,6 +138,7 @@ class Search extends Component {
                 class="movies"
                 movies={this.state.movies}
                 alert={this.alertUser}
+                celebrate={this.celebrateUser}
               />
             </Col>
           </Row>
