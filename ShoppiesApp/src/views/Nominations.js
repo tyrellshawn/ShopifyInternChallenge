@@ -1,4 +1,4 @@
-import React, { Component, useContext, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import MovieList from '../components/Movies/MovieList';
 // reactstrap components
 import {
@@ -17,7 +17,10 @@ import NominationProvider, {
 } from '../contexts/NominationContext';
 function Nominations() {
   const { nominations } = useNominations();
-  const [movies] = useState(Array.from(nominations.values()));
+  const [movies, setMovies] = useState(Array.from(nominations.values()));
+  useEffect(() => {
+    setMovies(Array.from(nominations.values()));
+  });
 
   return (
     <>
