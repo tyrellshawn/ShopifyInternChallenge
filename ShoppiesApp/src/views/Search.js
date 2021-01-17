@@ -56,7 +56,6 @@ class Search extends Component {
         `http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie&page=${pageNumber}`
       )
       .then((response) => {
-        console.log(response);
         if (response.data.Response === 'False') {
           console.log('API Error: ' + response.data.Error);
         } else {

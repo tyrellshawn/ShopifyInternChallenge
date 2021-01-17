@@ -16,8 +16,8 @@ import NominationProvider from './contexts/NominationContext';
 ReactDOM.render(
   <ThemeContextWrapper>
     <BackgroundColorWrapper>
-      <BrowserRouter>
-        <NominationProvider>
+      <NominationProvider>
+        <BrowserRouter>
           <Switch>
             <Route
               path="/admin"
@@ -26,8 +26,8 @@ ReactDOM.render(
             <Route path="/rtl" render={(props) => <RTLLayout {...props} />} />
             <Redirect from="/" to="/admin/search" />
           </Switch>
-        </NominationProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </NominationProvider>
     </BackgroundColorWrapper>
   </ThemeContextWrapper>,
   document.getElementById('root')

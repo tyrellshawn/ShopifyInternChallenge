@@ -5,8 +5,9 @@ import {
   UpdateNominationContext,
 } from '../../contexts/NominationContext';
 
-var Movie = (props) => {
-  const { nominated, setNominations } = useContext(NominationContext);
+const Movie = (props) => {
+  const { nominations, setNominations } = useContext(NominationContext);
+  const { nominated, setNominated } = useState(false);
 
   // const useNominationUpdate = useNominationUpdate();
 
@@ -37,11 +38,19 @@ var Movie = (props) => {
             onClick={() => {
               setNominations((prev) => {
                 console.log(`Nominated movie with ID: ${props.imdbID}`);
-                return [...prev, { key: props.imdbID }];
+                console.log(prev);
+                if (prev.size < 5) {
+                  prev.set(props.imdbID, props);
+
+                  return prev;
+                } else {
+                  console.log(`5 Movies Nominated`);
+                  return prev;
+                }
               });
             }}
           >
-            {nominated ? 'Un-Nominate' : 'Nominate'}
+            {nominations.has(props.imdbID) ? 'Un-Nominate' : 'Nominate'}
           </a>
         </div>
       </Card>
