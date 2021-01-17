@@ -6,7 +6,7 @@ import { useNominations } from '../contexts/NominationContext';
 function Nominations() {
   const { nominations } = useNominations();
   const nominationData = Array.from(nominations.values());
-  const [movies, setMovies] = useState(nominationData);
+  const [movies, setMovies] = useState(Array.from(nominations.values()));
   useEffect(() => {
     setMovies(Array.from(nominations.values()));
   }, [movies]);
