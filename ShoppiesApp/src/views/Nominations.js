@@ -5,10 +5,11 @@ import { Card, CardHeader, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import { useNominations } from '../contexts/NominationContext';
 function Nominations() {
   const { nominations } = useNominations();
-  const [movies, setMovies] = useState(Array.from(nominations.values()));
+  const nominationData = Array.from(nominations.values());
+  const [movies, setMovies] = useState(nominationData);
   useEffect(() => {
-    setMovies(Array.from(nominations.values()));
-  });
+    setMovies(nominationData);
+  }, [nominations]);
 
   return (
     <>
