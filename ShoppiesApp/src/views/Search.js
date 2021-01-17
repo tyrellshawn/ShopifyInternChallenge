@@ -22,8 +22,14 @@ import {
 class Search extends Component {
   constructor() {
     super();
-    this.state = { movies: [], searchTerm: '', totalResult: 0, currentPage: 1 };
-    this.apiKey = '63e90fe3';
+    this.state = {
+      movies: [],
+      searchTerm: '',
+      totalResult: 0,
+      currentPage: 1,
+      alertActive: false,
+    };
+    this.apiKey = process.env.OMDB_API_KEY;
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -75,6 +81,7 @@ class Search extends Component {
       <>
         <div className="content">
           <Row>
+            <Col md="12"></Col>
             <Col md="12">
               <Card>
                 <CardHeader>
