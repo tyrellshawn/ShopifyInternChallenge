@@ -99,7 +99,7 @@ class Search extends Component {
                 {this.state.totalResult}
               </span>
 
-              <MovieList id="movies" movies={this.state.movies} />
+              <MovieList class="movies" movies={this.state.movies} />
             </Col>
           </Row>
           <Row>

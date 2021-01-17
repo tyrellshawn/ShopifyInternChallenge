@@ -8,7 +8,7 @@ import {
 
 const Movie = (props) => {
   const { nominations, setNominations } = useNominations();
-  const [nominated, setNominated] = useState(false);
+  const [nominated, setNominated] = useState(nominations.has(props.imdbID));
 
   // const useNominationUpdate = useNominationUpdate();
 
@@ -38,16 +38,24 @@ const Movie = (props) => {
             className={nominated ? `btn  btn-secondary` : `btn  btn-primary`}
             onClick={() => {
               setNominations((prev) => {
-                console.log(`Nominated movie with ID: ${props.imdbID}`);
-                console.log(prev);
+                if (!nominated) {
+                  //Nominating a Movie
+                  if (prev.size < 5) {
+                    prev.set(props.imdbID, props);
 
-                if (prev.size < 5) {
-                  prev.set(props.imdbID, props);
-
-                  return prev;
+                    return prev;
+                  } else {
+                    console.log(`5 Movies Nominated`);
+                    return prev;
+                  }
                 } else {
-                  console.log(`5 Movies Nominated`);
-                  return prev;
+                  // Un-Nominating a Movie
+                  try {
+                    prev.delete(props.imdbID);
+                    return prev;
+                  } catch (e) {
+                    console.log(`Error occurred un-nominating movie `);
+                  }
                 }
               });
               setNominated(nominations.has(props.imdbID));

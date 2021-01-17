@@ -1,5 +1,5 @@
-import React, { Component, useContext } from 'react';
-
+import React, { Component, useContext, useState } from 'react';
+import MovieList from '../components/Movies/MovieList';
 // reactstrap components
 import {
   Card,
@@ -15,30 +15,27 @@ import NominationProvider, {
   UpdateNominationContext,
   useNominations,
 } from '../contexts/NominationContext';
-class Nominations extends Component {
-  constructor() {
-    super();
-    // const [nominations] = this.context;
+function Nominations() {
+  const { nominations } = useNominations();
 
-    this.state = { movies: [] };
-  }
-  render() {
-    return (
-      <>
-        <div className="content">
-          <Row>
-            <Col md="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">Movies You've Nominated</CardTitle>
-                </CardHeader>
-                <CardBody></CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </>
-    );
-  }
+  return (
+    <>
+      <div className="content">
+        <Row>
+          <Col md="12">
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Movies You've Nominated</CardTitle>
+              </CardHeader>
+              <CardBody></CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <MovieList id="movies" movies={[]} />
+        </Row>
+      </div>
+    </>
+  );
 }
 export default Nominations;
