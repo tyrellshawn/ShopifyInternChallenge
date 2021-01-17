@@ -1,20 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieList from '../components/Movies/MovieList';
 // reactstrap components
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Table,
-  Row,
-  Col,
-} from 'reactstrap';
-import NominationProvider, {
-  NominationContext,
-  UpdateNominationContext,
-  useNominations,
-} from '../contexts/NominationContext';
+import { Card, CardHeader, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { useNominations } from '../contexts/NominationContext';
 function Nominations() {
   const { nominations } = useNominations();
   const [movies, setMovies] = useState(Array.from(nominations.values()));

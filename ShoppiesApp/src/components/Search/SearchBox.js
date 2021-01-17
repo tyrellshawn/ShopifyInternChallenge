@@ -1,16 +1,5 @@
-import React, { Component } from 'react';
-import {
-  Card,
-  Button,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Row,
-  Col,
-  Modal,
-  ModalHeader,
-  Input,
-} from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, Input } from 'reactstrap';
 
 const SearchBox = (props) => {
   return (

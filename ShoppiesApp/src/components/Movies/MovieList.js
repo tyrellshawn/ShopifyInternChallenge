@@ -13,6 +13,7 @@ const MovieList = (props) => {
               movie.hasOwnProperty('Year') ? movie.Year : movie.releaseYear
             }
             imdbID={movie.imdbID}
+            alert={props.hasOwnProperty('alert') ? props.alert : false}
           />
         );
       })}

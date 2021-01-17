@@ -20041,7 +20041,11 @@ select.form-control option {
 .movie img {
   width: 100%;
 }
-
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media (min-width: 960px) {
   .movies .col-md-3 .well {
     height: 390px;

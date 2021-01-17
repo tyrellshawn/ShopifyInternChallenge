@@ -4,20 +4,9 @@ import axios from 'axios';
 import MovieList from '../components/Movies/MovieList';
 import SearchBox from '../components/Search/SearchBox';
 import PaginationView from '../components/Search/Pagination';
-
+import NotificationAlert from 'react-notification-alert';
 // reactstrap components
-import {
-  Card,
-  Button,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Row,
-  Col,
-  Modal,
-  ModalHeader,
-  Input,
-} from 'reactstrap';
+import { Card, CardHeader, CardBody, CardTitle, Row, Col } from 'reactstrap';
 
 class Search extends Component {
   constructor() {
@@ -29,8 +18,30 @@ class Search extends Component {
       currentPage: 1,
       alertActive: false,
     };
-    this.apiKey = process.env.OMDB_API_KEY;
+    this.notificationAlertRef = React.createRef();
+    this.apiKey = '63e90fe3';
   }
+  alertUser = () => {
+    if (!this.state.alertActive) {
+      this.setState({ alertActive: true });
+      let options = {
+        place: 'br',
+        message: (
+          <div>
+            <div>
+              <span>You have nominated 5 movies. Un-nominate please.</span>
+            </div>
+          </div>
+        ),
+        type: 'danger',
+        icon: 'tim-icons icon-bell-55',
+        autoDismiss: 1,
+      };
+      this.notificationAlertRef.current.notificationAlert(options);
+    } else {
+      this.setState({ alertActive: false });
+    }
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -38,7 +49,6 @@ class Search extends Component {
         `http://www.omdbapi.com?t=${this.state.searchTerm}?&s=${this.state.searchTerm}&apikey=${this.apiKey}&type=movie`
       )
       .then((response) => {
-        console.log(response);
         if (response.data.Response === 'False') {
           console.log('API Error: ' + response.data.Error);
         } else {
@@ -54,7 +64,7 @@ class Search extends Component {
   };
   handleChange = (event) => {
     this.setState({ searchTerm: event.target.value });
-    // this.handleSubmit(event);
+    this.handleSubmit(event);
   };
   nextPage = (pageNumber) => {
     axios
@@ -80,8 +90,10 @@ class Search extends Component {
     return (
       <>
         <div className="content">
+          <div className="react-notification-alert-container">
+            <NotificationAlert ref={this.notificationAlertRef} />
+          </div>
           <Row>
-            <Col md="12"></Col>
             <Col md="12">
               <Card>
                 <CardHeader>
@@ -106,10 +118,14 @@ class Search extends Component {
                 {this.state.totalResult}
               </span>
 
-              <MovieList class="movies" movies={this.state.movies} />
+              <MovieList
+                class="movies"
+                movies={this.state.movies}
+                alert={this.alertUser}
+              />
             </Col>
           </Row>
-          <Row>
+          <Row className="center">
             {this.state.totalResult > 10 ? (
               <PaginationView
                 pages={numberOfPages}

@@ -1,10 +1,6 @@
-import React, { Component, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Card } from 'reactstrap';
-import {
-  NominationContext,
-  UpdateNominationContext,
-  useNominations,
-} from '../../contexts/NominationContext';
+import { useNominations } from '../../contexts/NominationContext';
 
 const Movie = (props) => {
   const { nominations, setNominations } = useNominations();
@@ -45,7 +41,7 @@ const Movie = (props) => {
 
                     return prev;
                   } else {
-                    console.log(`5 Movies Nominated`);
+                    props.alert();
                     return prev;
                   }
                 } else {
